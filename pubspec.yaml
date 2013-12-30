@@ -1,0 +1,9 @@
+name: MonitoringVivaldiClient
+description: A sample web application
+dependencies:
+  angular: any
+  bootjack: any
+  browser: any
+  simplot:
+    git: git://github.com/scribeGriff/simplot.git
+  yaml: any
