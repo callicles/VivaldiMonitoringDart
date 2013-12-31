@@ -1,3 +1,5 @@
+library dndFiles;
+
 import 'dart:html';
 import 'package:MonitoringVivaldiClient/io/htmlescape.dart';
 
