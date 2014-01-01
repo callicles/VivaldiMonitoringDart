@@ -4,6 +4,6 @@ abstract class distantElement{
   
   void update();
   
-  String getPath();
+  Uri getUri();
   
 }

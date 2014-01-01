@@ -24,7 +24,7 @@ class VivaldiNode implements distantElement{
   void update(){
   }
   
-  String getPath(){
-    return ""+conf.getAPIURI()+path+_id;
+  Uri getUri(){
+    return Uri.parse(conf.getAPIURI().toString()+path+_id);
   }
 }

@@ -1,3 +1,5 @@
+library HtmlEscape;
+
 String htmlEscape(String text) {
   return text.replaceAll("&", "&amp;")
              .replaceAll("<", "&lt;")

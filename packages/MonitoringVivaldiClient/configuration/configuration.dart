@@ -1,4 +1,6 @@
 library configurationLib;
+
+import 'dart:async';
 import 'dart:html';
 import 'package:bootjack/bootjack.dart';
 import 'package:yaml/yaml.dart';
@@ -8,12 +10,14 @@ class Configuration {
   
   Map<String,Plot> plots;
   
+  StreamController configDoneController = new StreamController.broadcast();
+  
   Element _configureButton;
   Modal _configurationModal;
 
   String _apiLogin;
   String _apiPassword;
-  String _apiURI;
+  Uri _apiURI;
   
   DndFiles _configFile;
   FileReader _reader;
@@ -36,18 +40,22 @@ class Configuration {
     _reader.onLoad.listen((e) {
       
       var doc = loadYaml(_reader.result);
-      
-      _apiLogin = doc['rootUrl'];
-      _apiPassword = doc['login'];
-      _apiURI = doc['password'];
+
+      _apiURI = Uri.parse(doc['rootUrl']);
+      _apiLogin = doc['login'];
+      _apiPassword = doc['password'];
       
       print("Login : "+_apiLogin);
       print("Pass : "+_apiPassword);
-      print("Login : "+_apiURI);
+      print("Uri : "+_apiURI.toString());
       
       _configurationModal.toggle();
+      
+      configDoneController.add("configured");
     });
   }
+  
+  Stream get configDone => configDoneController.stream;
   
   String getAPILogin(){
     return _apiLogin;
@@ -55,7 +63,7 @@ class Configuration {
   String getAPIPassword(){
     return _apiPassword;
   }
-  String getAPIURI(){
+  Uri getAPIURI(){
     return _apiURI;
   }
   

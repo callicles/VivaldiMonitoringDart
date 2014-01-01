@@ -20,8 +20,8 @@ class VivaldiInitTimeList implements distantElement {
     
   }
   
-  String getPath(){
-    return ""+conf.getAPIURI()+path;
+  Uri getUri(){
+    return Uri.parse(conf.getAPIURI().toString()+path);
   }
   
   List<VivaldiInitTime> getList(){
