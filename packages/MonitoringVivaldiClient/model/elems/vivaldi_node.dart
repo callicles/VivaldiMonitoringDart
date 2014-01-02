@@ -3,19 +3,17 @@ library vivaldiNode;
 import 'package:MonitoringVivaldiClient/model/distantelement.dart';
 import 'package:MonitoringVivaldiClient/model/elems/vivaldi_network.dart';
 import 'package:MonitoringVivaldiClient/configuration/configuration.dart';
+import 'package:MonitoringVivaldiClient/model/model.dart';
 
 class VivaldiNode implements distantElement{
   
   static String path = "/nodes/";
   
-  static Configuration conf;
-  
   String _id;
   String _path;
   VivaldiNetwork _network;
   
-  VivaldiNode(Configuration config, String id, String path, VivaldiNetwork network){
-    conf = config;
+  VivaldiNode(String id, String path, VivaldiNetwork network){
     _id = id;
     _path = path;
     _network = network;
@@ -25,6 +23,6 @@ class VivaldiNode implements distantElement{
   }
   
   Uri getUri(){
-    return Uri.parse(conf.getAPIURI().toString()+path+_id);
+    return Uri.parse(Model.config.getAPIURI().toString()+path+_id);
   }
 }

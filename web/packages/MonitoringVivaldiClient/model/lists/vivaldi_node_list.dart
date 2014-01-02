@@ -6,30 +6,28 @@ import 'dart:convert';
 import 'package:MonitoringVivaldiClient/model/distantelement.dart';
 import 'package:MonitoringVivaldiClient/model/elems/vivaldi_node.dart';
 import 'package:MonitoringVivaldiClient/configuration/configuration.dart';
+import 'package:MonitoringVivaldiClient/model/model.dart';
 
 class VivaldiNodeList implements distantElement {
   
   static String path = "/nodes/";
   
-  Configuration conf;
-  
   List<VivaldiNode> _nodeList;
   
-  VivaldiNodeList(Configuration config){
-    conf = config;      
+  VivaldiNodeList(){      
   }
   
   void update(){
     HttpRequest req = new HttpRequest();
     
     req
-    ..open('GET', getUri().toString(), async: true , user: conf.getAPILogin(), password: conf.getAPIPassword())
+    ..open('GET', getUri().toString(), async: true , user: Model.config.getAPILogin(), password: Model.config.getAPIPassword())
     ..onLoadEnd.listen((e) => updateList(req))
     ..send("");
   }
   
   Uri getUri(){
-    return Uri.parse(conf.getAPIURI().toString()+path);
+    return Uri.parse(Model.config.getAPIURI().toString()+path);
   }
   
   List<VivaldiNode> getList(){

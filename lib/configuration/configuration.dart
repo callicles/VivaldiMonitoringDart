@@ -4,11 +4,9 @@ import 'dart:async';
 import 'dart:html';
 import 'package:bootjack/bootjack.dart';
 import 'package:yaml/yaml.dart';
-import 'package:MonitoringVivaldiClient/io/dndfiles.dart';
+import 'package:MonitoringVivaldiClient/io/configFile.dart';
 
 class Configuration {
-  
-  Map<String,Plot> plots;
   
   StreamController configDoneController = new StreamController.broadcast();
   
@@ -19,10 +17,10 @@ class Configuration {
   String _apiPassword;
   Uri _apiURI;
   
-  DndFiles _configFile;
+  ConfigFile _configFile;
   FileReader _reader;
   
-  Configuration(DndFiles configFilec){
+  Configuration(ConfigFile configFilec){
     _configurationModal = Modal.wire(querySelector('#configuration-mod'));
     
     _configFile = configFilec;
@@ -65,13 +63,5 @@ class Configuration {
   }
   Uri getAPIURI(){
     return _apiURI;
-  }
-  
-  Map<String,Plot> getPlots(){
-    return plots;
-  }
-  
-  void addPlot(String name, Plot plot){
-    plots.putIfAbsent(name, plot);
   }
 }

@@ -1,16 +1,16 @@
-library dndFiles;
+library configFile;
 
 import 'dart:html';
 import 'package:MonitoringVivaldiClient/io/htmlescape.dart';
 
-class DndFiles {
+class ConfigFile {
   FormElement _readForm;
   InputElement _fileInput;
   OutputElement _output;
   
   bool _fileValidity = false;
 
-  DndFiles() {
+  ConfigFile() {
     _output = document.querySelector('#list');
     _readForm = document.querySelector('#read');
     _fileInput = document.querySelector('#files');

@@ -2,18 +2,16 @@ library vivaldiNetwork;
 
 import 'package:MonitoringVivaldiClient/model/distantelement.dart';
 import 'package:MonitoringVivaldiClient/configuration/configuration.dart';
+import 'package:MonitoringVivaldiClient/model/model.dart';
 
 class VivaldiNetwork implements distantElement{
   
   static String path = "/networks/";
   
-  static Configuration conf;
-  
   String _id;
   String _name;
   
-  VivaldiNetwork(Configuration config, String id, String name){
-    conf = config;
+  VivaldiNetwork(String id, String name){
     _id = id;
     _name = name;
   }
@@ -22,6 +20,6 @@ class VivaldiNetwork implements distantElement{
   }
   
   Uri getUri(){
-    return Uri.parse(conf.getAPIURI().toString()+path+_id);
+    return Uri.parse(Model.config.getAPIURI().toString()+path+_id);
   }
 }

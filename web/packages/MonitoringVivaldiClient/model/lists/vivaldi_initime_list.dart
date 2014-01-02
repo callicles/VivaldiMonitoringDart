@@ -3,17 +3,15 @@ library vivaldiInitTimeList;
 import 'package:MonitoringVivaldiClient/model/distantelement.dart';
 import 'package:MonitoringVivaldiClient/model/elems/vivaldi_initime.dart';
 import 'package:MonitoringVivaldiClient/configuration/configuration.dart';
+import 'package:MonitoringVivaldiClient/model/model.dart';
 
 class VivaldiInitTimeList implements distantElement {
   
   static String path = "/initTimes/";
   
-  static Configuration conf;
-  
   List<VivaldiInitTime> _initTimeList;
   
-  VivaldiInitTimeList(Configuration conf){
-    conf = conf;      
+  VivaldiInitTimeList(){     
   }
   
   void update(){
@@ -21,7 +19,7 @@ class VivaldiInitTimeList implements distantElement {
   }
   
   Uri getUri(){
-    return Uri.parse(conf.getAPIURI().toString()+path);
+    return Uri.parse(Model.config.getAPIURI().toString()+path);
   }
   
   List<VivaldiInitTime> getList(){

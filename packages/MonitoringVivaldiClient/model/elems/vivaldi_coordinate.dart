@@ -3,12 +3,11 @@ library vivaldiCoordinate;
 import 'package:MonitoringVivaldiClient/model/distantelement.dart';
 import 'package:MonitoringVivaldiClient/model/elems/vivaldi_node.dart';
 import 'package:MonitoringVivaldiClient/configuration/configuration.dart';
+import 'package:MonitoringVivaldiClient/model/model.dart';
 
 class VivaldiCoordinate implements distantElement{
   
   static String path = "/coordinates/";
-  
-  static Configuration conf;
   
   String _id;
   num _x ;
@@ -16,8 +15,7 @@ class VivaldiCoordinate implements distantElement{
   VivaldiNode _node ;
   String _timestamp;
   
-  VivaldiCoordinate(Configuration config, String id, num x, num y, VivaldiNode node, String timestamp){
-    conf = config;
+  VivaldiCoordinate(String id, num x, num y, VivaldiNode node, String timestamp){
     _id = id;
     _x = x;
     _y = y;
@@ -29,6 +27,6 @@ class VivaldiCoordinate implements distantElement{
   }
   
   Uri getUri(){
-    return Uri.parse(conf.getAPIURI().toString()+path+_id);
+    return Uri.parse(Model.config.getAPIURI().toString()+path+_id);
   }
 }
