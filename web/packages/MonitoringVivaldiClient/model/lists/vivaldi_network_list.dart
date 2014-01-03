@@ -2,6 +2,7 @@ library vivaldiNetworkList;
 
 import 'dart:html';
 import 'dart:convert';
+import 'dart:async';
 
 import 'package:MonitoringVivaldiClient/model/distantelement.dart';
 import 'package:MonitoringVivaldiClient/model/elems/vivaldi_network.dart';
@@ -18,12 +19,9 @@ class VivaldiNetworkList implements distantElement {
   }
   
   void update(){
-    HttpRequest req = new HttpRequest();
+    Future<HttpRequest> futReq = HttpRequest.request(getUri().toString(), method: 'GET', withCredentials: true , responseType: "application/json",requestHeaders: Model.config.getAuthHeader());
     
-    req
-    ..open('GET', getUri().toString(), async: true , user: Model.config.getAPILogin(), password: Model.config.getAPIPassword())
-    ..onLoadEnd.listen((e) => updateList(req))
-    ..send("");
+    futReq.then((HttpRequest req) => print(req.responseText));
   }
   
   Uri getUri(){

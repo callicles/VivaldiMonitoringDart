@@ -18,12 +18,7 @@ class VivaldiNodeList implements distantElement {
   }
   
   void update(){
-    HttpRequest req = new HttpRequest();
-    
-    req
-    ..open('GET', getUri().toString(), async: true , user: Model.config.getAPILogin(), password: Model.config.getAPIPassword())
-    ..onLoadEnd.listen((e) => updateList(req))
-    ..send("");
+
   }
   
   Uri getUri(){
@@ -35,10 +30,6 @@ class VivaldiNodeList implements distantElement {
   }
   
   void updateList(HttpRequest req){
-    if (req.status == 200){
-      print(JSON.decode(req.responseText));
-    }else {
-      print("Error on Request : "+req.status.toString());
-    }
+
   }
 }

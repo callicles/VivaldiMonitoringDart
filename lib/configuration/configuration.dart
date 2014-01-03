@@ -13,9 +13,8 @@ class Configuration {
   Element _configureButton;
   Modal _configurationModal;
 
-  String _apiLogin;
-  String _apiPassword;
-  Uri _apiURI;
+  Uri _apiURI; 
+  Map<String,String> _requestAuthHeader = new Map<String,String>();
   
   ConfigFile _configFile;
   FileReader _reader;
@@ -40,12 +39,8 @@ class Configuration {
       var doc = loadYaml(_reader.result);
 
       _apiURI = Uri.parse(doc['rootUrl']);
-      _apiLogin = doc['login'];
-      _apiPassword = doc['password'];
-      
-      print("Login : "+_apiLogin);
-      print("Pass : "+_apiPassword);
-      print("Uri : "+_apiURI.toString());
+      _requestAuthHeader.putIfAbsent("authorization", ()=>"Basic "+window.btoa(doc['login']+":"+ doc['password']));
+      _requestAuthHeader.putIfAbsent("accept", ()=>"application/json");
       
       _configurationModal.toggle();
       
@@ -55,12 +50,10 @@ class Configuration {
   
   Stream get configDone => configDoneController.stream;
   
-  String getAPILogin(){
-    return _apiLogin;
+  Map<String,String> getAuthHeader(){
+    return _requestAuthHeader;
   }
-  String getAPIPassword(){
-    return _apiPassword;
-  }
+
   Uri getAPIURI(){
     return _apiURI;
   }
